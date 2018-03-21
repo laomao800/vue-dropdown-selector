@@ -47,6 +47,11 @@ export default class DropdownSelector extends Vue {
     this.showDropdown = val
   }
 
+  @Watch('selection')
+  private selectionChange (val: any) {
+    this.$emit('change', val)
+  }
+
   private removeOption (index: number) {
     if (Array.isArray(this.selection)) {
       const newSelection = [
@@ -54,7 +59,6 @@ export default class DropdownSelector extends Vue {
         ...this.selection.slice(index + 1, this.selection.length)
       ]
       this.$emit('update:selection', newSelection)
-      this.$emit('change', this.selection)
     }
   }
 

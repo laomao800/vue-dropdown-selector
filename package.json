@@ -1,7 +1,7 @@
 {
   "name": "@laomao800/vue-dropdown-selector",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.2.0",
+  "description": "Customizable dropdown Vue.js component.",
   "author": "laomao800 <laomao800@gmail.com>",
   "license": "MIT",
   "repository": {
