@@ -24,10 +24,18 @@ yarn add @laomao800/vue-dropdown-selector
       placeholder="Select single value"
       >
       <div class="selector" style="padding:15px">
-        <label style="margin-right:10px"><input v-model="selectionSingle" name="selectionSingle" type="radio" value="value1" />value1</label>
-        <label style="margin-right:10px"><input v-model="selectionSingle" name="selectionSingle" type="radio" value="value2" />value2</label>
-        <label style="margin-right:10px"><input v-model="selectionSingle" name="selectionSingle" type="radio" value="value3" />value3</label>
-        <label style="margin-right:10px"><input v-model="selectionSingle" name="selectionSingle" type="radio" value="value4" />value4</label>
+        <label style="margin-right:10px">
+          <input v-model="selectionSingle" name="selectionSingle" type="radio" value="value1" />value1
+        </label>
+        <label style="margin-right:10px">
+          <input v-model="selectionSingle" name="selectionSingle" type="radio" value="value2" />value2
+        </label>
+        <label style="margin-right:10px">
+          <input v-model="selectionSingle" name="selectionSingle" type="radio" value="value3" />value3
+        </label>
+        <label style="margin-right:10px">
+          <input v-model="selectionSingle" name="selectionSingle" type="radio" value="value4" />value4
+        </label>
       </div>
     </dropdown-selector>
     <pre>{{ selectionSingle }}</pre>
@@ -58,10 +66,18 @@ export default {
       placeholder="Select multiple value"
       >
       <div class="selector" style="padding:15px">
-        <label style="margin-right:10px"><input v-model="selectionMultiple" name="selectionMultiple" type="checkbox" value="value1" />value1</label>
-        <label style="margin-right:10px"><input v-model="selectionMultiple" name="selectionMultiple" type="checkbox" value="value2" />value2</label>
-        <label style="margin-right:10px"><input v-model="selectionMultiple" name="selectionMultiple" type="checkbox" value="value3" />value3</label>
-        <label style="margin-right:10px"><input v-model="selectionMultiple" name="selectionMultiple" type="checkbox" value="value4" />value4</label>
+        <label style="margin-right:10px">
+          <input v-model="selectionMultiple" name="selectionMultiple" type="checkbox" value="value1" />value1
+        </label>
+        <label style="margin-right:10px">
+          <input v-model="selectionMultiple" name="selectionMultiple" type="checkbox" value="value2" />value2
+        </label>
+        <label style="margin-right:10px">
+          <input v-model="selectionMultiple" name="selectionMultiple" type="checkbox" value="value3" />value3
+        </label>
+        <label style="margin-right:10px">
+          <input v-model="selectionMultiple" name="selectionMultiple" type="checkbox" value="value4" />value4
+        </label>
       </div>
     </dropdown-selector>
     <pre>{{ selectionMultiple }}</pre>
@@ -93,8 +109,16 @@ export default {
       >
       <template slot="selection" slot-scope="props">{{ props.selection.short }}</template>
       <div class="selector" style="padding:15px">
-        <label v-for="month in months" :key="month.value" style="display:inline-block;width:30%;margin-right:10px">
-          <input type="checkbox" :checked="selectionObject.indexOf(month) > -1" @change="handleMonthSelect($event, month)" />
+        <label
+          v-for="month in months"
+          :key="month.value" style="display:inline-block;width:30%;
+          margin-right:10px"
+        >
+          <input
+            type="checkbox"
+            :checked="selectionObject.indexOf(month) > -1"
+            @change="handleMonthSelect($event, month)"
+          />
           {{ month.label }}
         </label>
       </div>
