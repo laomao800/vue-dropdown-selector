@@ -9,7 +9,7 @@
     }"
     v-click-outside="handleHideDropdown"
   >
-    <div class="selector__selection" @click="toggleDropdown">
+    <div ref="popupTrigger" class="selector__selection" @click="toggleDropdown">
       <div v-if="isSelectionEmpty" class="selector__placeholder">{{ placeholder }}</div>
       <template v-else>
         <div v-if="isMultiple" class="selector__multiple">
@@ -24,8 +24,13 @@
       </template>
       <div class="selector__arrow"></div>
     </div>
-    <transition name="selector__container-trans" ref="container">
-      <div class="dropdown-selector__container" v-show="isShowDropdown" :style="{ width: `${dropdownWidth}px` }">
+    <transition name="selector__container-trans">
+      <div
+        ref="popupContainer"
+        v-show="isShowDropdown"
+        :style="popupStyle"
+        @click.stop
+        class="dropdown-selector__container">
         <slot />
       </div>
     </transition>

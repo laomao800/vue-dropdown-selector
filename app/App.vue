@@ -6,6 +6,7 @@
       :multilple="false"
       :width="400"
       placeholder="Select single value"
+      :append-to-body="true"
       >
       <div class="selector" style="padding:15px">
         <label style="margin-right:10px"><input v-model="selectionSingle" name="selectionSingle" type="radio" value="value1" />value1</label>

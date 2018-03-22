@@ -1,6 +1,8 @@
+import { VNode } from 'vue'
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import hasValue from 'has-values'
 import ClickOutside from './click-out-side'
+import getScrollParent from './get-scroll-parent'
 
 const isEmpty = (val: any) => !hasValue(val)
 
@@ -28,10 +30,20 @@ export default class DropdownSelector extends Vue {
   @Prop({ type: Number })
   public dropdownWidth!: number
 
-  @Prop({ type: Number })
-  public zIndex: number = 1000
+  @Prop({ type: Number, default: 1000 })
+  public zIndex!: number
+
+  @Prop({ type: Boolean, default: false })
+  public appendToBody!: boolean
 
   private showDropdown: boolean = false
+  private popupPosition: object = {}
+  private scrollParent: any = null
+
+  public $refs!: {
+    popupContainer: any,
+    popupTrigger: any
+  }
 
   get isShowDropdown () {
     return this.showDropdown
@@ -45,6 +57,13 @@ export default class DropdownSelector extends Vue {
     return this.multilple && Array.isArray(this.selection)
   }
 
+  get popupStyle () {
+    return {
+      width: this.dropdownWidth ? `${this.dropdownWidth}px` : null,
+      ...this.popupPosition
+    }
+  }
+
   @Watch('dropdownVisible', { immediate: true })
   private visibleChanged (val: boolean) {
     this.showDropdown = val
@@ -53,6 +72,16 @@ export default class DropdownSelector extends Vue {
   @Watch('selection')
   private selectionChange (val: any) {
     this.$emit('change', val)
+  }
+
+  private mounted () {
+    if (this.appendToBody) {
+      document.body.appendChild(this.$refs.popupContainer)
+      this.scrollParent = getScrollParent(this.$refs.popupContainer)
+      if (this.scrollParent === window.document.body || this.scrollParent === window.document.documentElement) {
+        this.scrollParent = window
+      }
+    }
   }
 
   private removeOption (index: number) {
@@ -66,6 +95,9 @@ export default class DropdownSelector extends Vue {
   }
 
   private handleShowDropdown () {
+    if (this.appendToBody) {
+      this.updatePopupPosition()
+    }
     this.showDropdown = true
     this.$emit('update:dropdownVisible', true)
     this.$emit('show-dropdown')
@@ -79,7 +111,24 @@ export default class DropdownSelector extends Vue {
 
   private toggleDropdown () {
     const newStatus = !this.showDropdown
-    this.showDropdown = newStatus
+    newStatus
+      ? this.handleShowDropdown()
+      : this.handleHideDropdown()
     this.$emit('update:dropdownVisible', newStatus)
+  }
+
+  private getPopupPosition (): object {
+    const triggerBounding = this.$refs.popupTrigger.getBoundingClientRect()
+    const offsetLeft = triggerBounding.left + this.scrollParent.scrollX
+    const offsetTop = triggerBounding.bottom + this.scrollParent.scrollY
+    return {
+      left: `${offsetLeft}px`,
+      top: `${offsetTop}px`,
+      width: this.dropdownWidth ? `${this.dropdownWidth}px` : `${triggerBounding.width}px`
+    }
+  }
+
+  private updatePopupPosition () {
+    this.popupPosition = this.getPopupPosition()
   }
 }
