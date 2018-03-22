@@ -7,4 +7,6 @@ export default class DropdownSelector extends Vue {
   dropdownVisible: boolean
   width: number | string
   dropdownWidth: number | string
+  zIndex: number
+  appendToBody: boolean
 }
