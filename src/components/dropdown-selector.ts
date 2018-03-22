@@ -28,6 +28,9 @@ export default class DropdownSelector extends Vue {
   @Prop({ type: Number })
   public dropdownWidth!: number
 
+  @Prop({ type: Number })
+  public zIndex: number = 1000
+
   private showDropdown: boolean = false
 
   get isShowDropdown () {

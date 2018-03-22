@@ -3,7 +3,10 @@
       'dropdown-selector--active': isShowDropdown,
       'dropdown-selector--inline': width
     }]"
-    :style="{ width: `${width}px` }"
+    :style="{
+      width: `${width}px`,
+      zIndex: isShowDropdown ? zIndex + 1 : zIndex
+    }"
     v-click-outside="handleHideDropdown"
   >
     <div class="selector__selection" @click="toggleDropdown">
@@ -21,8 +24,8 @@
       </template>
       <div class="selector__arrow"></div>
     </div>
-    <transition name="zoom-in-top">
-      <div class="selector__container" v-show="isShowDropdown" :style="{ width: `${dropdownWidth}px` }">
+    <transition name="selector__container-trans" ref="container">
+      <div class="dropdown-selector__container" v-show="isShowDropdown" :style="{ width: `${dropdownWidth}px` }">
         <slot />
       </div>
     </transition>
