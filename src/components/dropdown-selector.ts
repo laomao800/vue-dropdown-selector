@@ -71,8 +71,12 @@ export default class DropdownSelector extends Vue {
   }
 
   @Watch('selection')
-  private selectionChange (val: any) {
+  private async selectionChange (val: any) {
     this.$emit('change', val)
+    await this.$nextTick()
+    if (this.appendToBody) {
+      this.updatePopupPosition()
+    }
   }
 
   private mounted () {
@@ -102,6 +106,10 @@ export default class DropdownSelector extends Vue {
     this.scrollParents.forEach((element) => {
       element.removeEventListener('scroll', this.updatePopupPosition)
     })
+    if (this.appendToBody) {
+      const popup = this.$refs.popupContainer
+      popup.parentElement.removeChild(popup)
+    }
   }
 
   private removeOption (index: number) {
