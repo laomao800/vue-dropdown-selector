@@ -39,6 +39,7 @@
       :multilple="true"
       :width="400"
       placeholder="Select months"
+      :append-to-body="true"
       >
       <template slot="selection" slot-scope="props">{{ props.selection.short }}</template>
       <div class="selector" style="padding:15px">
@@ -90,7 +91,10 @@ export default {
       if ($event.target.checked) {
         this.selectionObject.push(month)
       } else {
-        this.selectionObject.slice(this.selectionObject.findIndex(month), 1)
+        const index = this.selectionObject.findIndex((selection) => selection === month)
+        if (index > -1) {
+          this.selectionObject.splice(index, 1)
+        }
       }
     }
   }
