@@ -71,12 +71,13 @@ export default class DropdownSelector extends Vue {
   }
 
   @Watch('selection')
-  private async selectionChange (val: any) {
+  private selectionChange (val: any) {
     this.$emit('change', val)
-    await this.$nextTick()
-    if (this.appendToBody) {
-      this.updatePopupPosition()
-    }
+    this.$nextTick().then(() => {
+      if (this.appendToBody) {
+        this.updatePopupPosition()
+      }
+    })
   }
 
   private mounted () {
