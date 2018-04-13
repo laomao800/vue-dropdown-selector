@@ -12,7 +12,7 @@ const isEmpty = (val: any) => !hasValue(val)
   }
 })
 export default class DropdownSelector extends Vue {
-  @Prop({ default: (): Array<Object> => [] })
+  @Prop({ default: (): object[] => [] })
   public selection!: any
 
   @Prop({ type: Boolean, default: true })
@@ -36,9 +36,9 @@ export default class DropdownSelector extends Vue {
   @Prop({ type: Boolean, default: false })
   public appendToBody!: boolean
 
-  private showDropdown: boolean = false
-  private popupPosition: object = {}
-  private scrollParents: Array<Window|Element> = []
+  public showDropdown: boolean = false
+  public popupPosition: object = {}
+  public scrollParents: Array<Window | Element> = []
 
   public $refs!: {
     popupContainer: any,
