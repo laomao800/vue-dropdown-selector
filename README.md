@@ -43,7 +43,7 @@ yarn add @laomao800/vue-dropdown-selector
 </template>
 
 <script>
-import DropdownSelector from '@/components/dropdown-selector.vue'
+import DropdownSelector from '@laomao800/vue-dropdown-selector'
 
 export default {
   components: { DropdownSelector },
@@ -85,7 +85,7 @@ export default {
 </template>
 
 <script>
-import DropdownSelector from '@/components/dropdown-selector.vue'
+import DropdownSelector from '@laomao800/vue-dropdown-selector'
 
 export default {
   components: { DropdownSelector },
@@ -128,7 +128,7 @@ export default {
 </template>
 
 <script>
-import DropdownSelector from '@/components/dropdown-selector.vue'
+import DropdownSelector from '@laomao800/vue-dropdown-selector'
 
 export default {
   components: {
@@ -167,15 +167,15 @@ export default {
 
 ## Props
 
-| prop            | default | 说明
-| --------------- | ------- | ----
-| selection       | []      | 已选值，可为任意类型数据。__多选状态下，需添加 `.sync` 修饰符__
-| multilple       | true    | 是否暂时为多选样式，只有在 `selection` 为 Array 的时候，该选项为 `true` 才生效
-| placeholder     | ''      | placeholder
-| dropdownVisible | false   | 下拉显示状态。仅在需要通过非点击触发下拉时才需传入
-| width           |         | 组件宽度。不传该值则显示为 block 占位
-| dropdownWidth   |         | 单独设置下拉部分宽度。不设置则跟随 width
-| appendToBody    | false   | 弹出元素是否插入于 body 中。
+| prop            | default | 说明                                                                           |
+| --------------- | ------- | ------------------------------------------------------------------------------ |
+| selection       | []      | 已选值，可为任意类型数据。__多选状态下，需添加 `.sync` 修饰符__                |
+| multilple       | true    | 是否暂时为多选样式，只有在 `selection` 为 Array 的时候，该选项为 `true` 才生效 |
+| placeholder     | ''      | placeholder                                                                    |
+| dropdownVisible | false   | 下拉显示状态。仅在需要通过非点击触发下拉时才需传入                             |
+| width           |         | 组件宽度。不传该值则显示为 block 占位                                          |
+| dropdownWidth   |         | 单独设置下拉部分宽度。不设置则跟随 width                                       |
+| appendToBody    | false   | 弹出元素是否插入于 body 中。                                                   |
 
 ## Slot
 
@@ -187,8 +187,8 @@ export default {
 
 ## Events
 
-| Event         | 参数
-| ------------- | ----
-| change        | (selection)
-| show-dropdown | -
-| hide-dropdown | -
+| Event         | 参数        |
+| ------------- | ----------- |
+| change        | (selection) |
+| show-dropdown | -           |
+| hide-dropdown | -           |
