@@ -1,8 +1,8 @@
-import { VNode } from 'vue'
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import hasValue from 'has-values'
 import ClickOutside from './click-out-side'
 import getScrollParent from './get-scroll-parent'
+import './dropdown-selector.less'
 
 const isEmpty = (val: any) => !hasValue(val)
 
@@ -36,6 +36,9 @@ export default class DropdownSelector extends Vue {
   @Prop({ type: Boolean, default: false })
   public appendToBody!: boolean
 
+  @Prop({ type: String, default: '' })
+  public size!: string
+
   public showDropdown: boolean = false
   public popupPosition: object = {}
   public scrollParents: Array<Window | Element> = []
@@ -43,10 +46,6 @@ export default class DropdownSelector extends Vue {
   public $refs!: {
     popupContainer: any,
     popupTrigger: any
-  }
-
-  get isShowDropdown () {
-    return this.showDropdown
   }
 
   get isSelectionEmpty () {
@@ -71,13 +70,12 @@ export default class DropdownSelector extends Vue {
   }
 
   @Watch('selection')
-  private selectionChange (val: any) {
+  private async selectionChange (val: any) {
     this.$emit('change', val)
-    this.$nextTick().then(() => {
-      if (this.appendToBody) {
-        this.updatePopupPosition()
-      }
-    })
+    await this.$nextTick()
+    if (this.appendToBody) {
+      this.updatePopupPosition()
+    }
   }
 
   private mounted () {
@@ -99,6 +97,7 @@ export default class DropdownSelector extends Vue {
         this.scrollParents.forEach((element) => {
           element.addEventListener('scroll', this.updatePopupPosition)
         })
+        window.addEventListener('resize', this.updatePopupPosition)
       })
     }
   }
@@ -110,6 +109,7 @@ export default class DropdownSelector extends Vue {
     if (this.appendToBody) {
       const popup = this.$refs.popupContainer
       popup.parentElement.removeChild(popup)
+      window.removeEventListener('resize', this.updatePopupPosition)
     }
   }
 
@@ -158,7 +158,7 @@ export default class DropdownSelector extends Vue {
   }
 
   private updatePopupPosition () {
-    if (this.isShowDropdown) {
+    if (this.showDropdown) {
       this.popupPosition = this.getPopupPosition()
     }
   }

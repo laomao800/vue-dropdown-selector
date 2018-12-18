@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width:600px;margin:0 auto;">
     <h2>Single</h2>
     <dropdown-selector
       :selection.sync="selectionSingle"

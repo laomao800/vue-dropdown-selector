@@ -1,12 +1,9 @@
 <template>
   <div :class="['dropdown-selector', {
-      'dropdown-selector--active': isShowDropdown,
+      'dropdown-selector--active': showDropdown,
       'dropdown-selector--inline': width
     }]"
-    :style="{
-      width: `${width}px`,
-      zIndex: isShowDropdown ? zIndex + 1 : zIndex
-    }"
+    :style="{ width: `${width}px` }"
     v-click-outside="handleHideDropdown"
   >
     <div ref="popupTrigger" class="selector__selection" @click="toggleDropdown">
@@ -27,7 +24,7 @@
     <transition name="selector__container-trans">
       <div
         ref="popupContainer"
-        v-show="isShowDropdown"
+        v-show="showDropdown"
         :style="popupStyle"
         @click.stop
         class="dropdown-selector__container">
@@ -38,5 +35,3 @@
 </template>
 
 <script lang="ts" src="./dropdown-selector.ts"></script>
-
-<style lang="less" src="./dropdown-selector.less"></style>
