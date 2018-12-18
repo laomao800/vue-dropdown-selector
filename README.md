@@ -185,6 +185,14 @@ export default {
 <template slot="selection" slot-scope="props">{{ props.selection.otherPropertyName }}</template>
 ```
 
+## Methods
+
+| Methods        | 说明           |
+| -------------- | -------------- |
+| showDropdown   | 展开下拉框     |
+| hideDropdown   | 收起下拉框     |
+| toggleDropdown | 切换下拉框状态 |
+
 ## Events
 
 | Event         | 参数        |
