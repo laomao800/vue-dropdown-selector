@@ -1,11 +1,11 @@
 <template>
   <div
     :class="['dropdown-selector', {
-      'dropdown-selector--active': showDropdown,
+      'dropdown-selector--active': internalVisible,
       'dropdown-selector--inline': width
     }]"
     :style="triggerStyle"
-    v-click-outside="handleHideDropdown"
+    v-click-outside="hideDropdown"
   >
     <div ref="popupTrigger" class="selector__selection" @click="toggleDropdown">
       <div v-if="isSelectionEmpty" class="selector__placeholder">{{ placeholder }}</div>
@@ -29,7 +29,7 @@
     <transition name="selector__container-trans">
       <div
         ref="popupContainer"
-        v-show="showDropdown"
+        v-show="internalVisible"
         :style="popupStyle"
         @click.stop
         class="dropdown-selector__container"
@@ -76,15 +76,14 @@ export default {
     multilple: { type: Boolean, default: true },
     placeholder: { type: String, default: '' },
     dropdownVisible: { type: Boolean, default: false },
-    width: { type: [Number, String] },
-    dropdownWidth: { type: Number },
+    dropdownWidth: { type: [Number, String] },
     dropdownZIndex: { type: Number, default: 1000 },
     appendToBody: { type: Boolean, default: false }
   },
 
   data() {
     return {
-      showDropdown: false,
+      internalVisible: false,
       popupPosition: {},
       scrollParents: []
     }
@@ -112,10 +111,10 @@ export default {
   },
 
   watch: {
-    dropdownVisible: {
+    internalVisible: {
       immediate: true,
       handler(val) {
-        this.showDropdown = val
+        this.internalVisible = val
       }
     },
     async selection(val) {
@@ -176,8 +175,8 @@ export default {
       }
     },
 
-    handleShowDropdown() {
-      this.showDropdown = true
+    showDropdown() {
+      this.internalVisible = true
       this.$emit('update:dropdownVisible', true)
       this.$emit('show-dropdown')
       if (this.appendToBody) {
@@ -185,15 +184,15 @@ export default {
       }
     },
 
-    handleHideDropdown() {
-      this.showDropdown = false
+    hideDropdown() {
+      this.internalVisible = false
       this.$emit('update:dropdownVisible', false)
       this.$emit('hide-dropdown')
     },
 
     toggleDropdown() {
-      const newStatus = !this.showDropdown
-      newStatus ? this.handleShowDropdown() : this.handleHideDropdown()
+      const newStatus = !this.internalVisible
+      newStatus ? this.showDropdown() : this.hideDropdown()
       this.$emit('update:dropdownVisible', newStatus)
     },
 
@@ -211,7 +210,7 @@ export default {
     },
 
     updatePopupPosition() {
-      if (this.showDropdown) {
+      if (this.internalVisible) {
         this.popupPosition = this.getPopupPosition()
       }
     }
