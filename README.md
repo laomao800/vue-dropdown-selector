@@ -173,9 +173,9 @@ export default {
 | multilple       | true    | 是否暂时为多选样式，只有在 `selection` 为 Array 的时候，该选项为 `true` 才生效 |
 | placeholder     | ''      | placeholder                                                                    |
 | dropdownVisible | false   | 下拉显示状态。仅在需要通过非点击触发下拉时才需传入                             |
-| width           |         | 组件宽度。不传该值则显示为 block 占位                                          |
-| dropdownWidth   |         | 单独设置下拉部分宽度。不设置则跟随 width                                       |
+| dropdownWidth   | 300     | 单独设置下拉部分宽度。                                                         |
 | appendToBody    | false   | 弹出元素是否插入于 body 中。                                                   |
+| dropdownZIndex  | 1000    | appendToBody: true 时，弹出元素的 z-index 值                                   |
 
 ## Slot
 
