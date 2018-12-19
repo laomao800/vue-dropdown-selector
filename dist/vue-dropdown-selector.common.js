@@ -1,4 +1,4 @@
-/*! @laomao800/vue-dropdown-selector v1.0.1 */
+/*! @laomao800/vue-dropdown-selector v1.0.2 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -2913,7 +2913,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"d977dace-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=3979404b&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"d977dace-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=2bbd1e0c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"click-outside",rawName:"v-click-outside",value:(_vm.hideDropdown),expression:"hideDropdown"}],class:['dropdown-selector', {
     'dropdown-selector--active': _vm.internalVisible,
     'dropdown-selector--inline': _vm.width
@@ -2921,7 +2921,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=3979404b&
+// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=2bbd1e0c&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
 function _arrayWithoutHoles(arr) {
@@ -3300,7 +3300,7 @@ function parseSizeWithUnit(value) {
     popupStyle: function popupStyle() {
       return _objectSpread({
         width: parseSizeWithUnit(this.dropdownWidth),
-        zIndex: this.zIndex + 2
+        zIndex: this.dropdownZIndex + 2
       }, this.popupPosition);
     }
   },
