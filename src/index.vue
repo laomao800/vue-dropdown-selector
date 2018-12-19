@@ -104,7 +104,7 @@ export default {
     popupStyle() {
       return {
         width: parseSizeWithUnit(this.dropdownWidth),
-        zIndex: this.zIndex + 2,
+        zIndex: this.dropdownZIndex + 2,
         ...this.popupPosition
       }
     }
