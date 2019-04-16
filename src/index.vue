@@ -2,7 +2,8 @@
   <div
     :class="['dropdown-selector', {
       'dropdown-selector--active': internalVisible,
-      'dropdown-selector--inline': width
+      'dropdown-selector--inline': width,
+      'dropdown-selector--disabled': disabled,
     }]"
     :style="triggerStyle"
     v-click-outside="hideDropdown"
@@ -15,7 +16,7 @@
             <div class="selector__option-text">
               <slot name="selection" :selection="option">{{ option }}</slot>
             </div>
-            <div class="selector__option-close" @click.stop="removeOption(index)"></div>
+            <div v-if="!disabled" class="selector__option-close" @click.stop="removeOption(index)"></div>
           </div>
         </div>
         <div v-else class="selector__single">
@@ -56,10 +57,14 @@ const isEmpty = val => !hasValue(val)
  * '50.5%' -> '50%'
  * 'a' -> null
  */
-function parseSizeWithUnit(value) {
-  const isPercent = /\d+%/.test(value)
+export function parseSizeWithUnit(value) {
+  if (/^-?\d+(.\d+)?(%|(px))$/.test(value)) {
+    return value
+  } else if (typeof value === 'number') {
+    return `${value}px`
+  }
   const num = parseInt(value, 10)
-  return num ? (isPercent ? `${num}%` : `${num}px`) : null
+  return !isNaN(num) ? `${num}px` : null
 }
 
 export default {
@@ -78,7 +83,8 @@ export default {
     dropdownVisible: { type: Boolean, default: false },
     dropdownWidth: { type: [Number, String] },
     dropdownZIndex: { type: Number, default: 1000 },
-    appendToBody: { type: Boolean, default: false }
+    appendToBody: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false }
   },
 
   data() {
@@ -191,6 +197,7 @@ export default {
     },
 
     toggleDropdown() {
+      // if (this.disabled) return
       const newStatus = !this.internalVisible
       newStatus ? this.showDropdown() : this.hideDropdown()
       this.$emit('update:dropdownVisible', newStatus)

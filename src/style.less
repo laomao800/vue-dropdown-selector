@@ -1,10 +1,6 @@
 .dropdown-selector {
   position: relative;
 
-  &--inline {
-    display: inline-block;
-  }
-
   .selector__selection {
     position: relative;
     background-color: #fff;
@@ -117,6 +113,28 @@
     .selector__option-text {
       text-overflow: ellipsis;
       overflow: hidden;
+    }
+  }
+
+  &--inline {
+    display: inline-block;
+  }
+
+  &--disabled {
+    .selector__selection {
+      background-color: #f5f7fa;
+      border-color: #e4e7ed;
+      color: #c0c4cc;
+      cursor: not-allowed;
+
+      &:hover {
+        border-color: #e4e7ed;
+      }
+    }
+    .selector__multiple .selector__option {
+      padding: 0 8px;
+      background-color: #f0f2f5;
+      color: #909399;
     }
   }
 }
