@@ -25,7 +25,7 @@
           </div>
         </div>
       </template>
-      <div class="selector__arrow"></div>
+      <div v-if="!disabled" class="selector__arrow"></div>
     </div>
     <transition name="selector__container-trans">
       <div
@@ -197,7 +197,7 @@ export default {
     },
 
     toggleDropdown() {
-      // if (this.disabled) return
+      if (this.disabled) return
       const newStatus = !this.internalVisible
       newStatus ? this.showDropdown() : this.hideDropdown()
       this.$emit('update:dropdownVisible', newStatus)
