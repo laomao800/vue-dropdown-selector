@@ -1,6 +1,6 @@
 {
   "name": "@laomao800/vue-dropdown-selector",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Customizable dropdown Vue.js component.",
   "publishConfig": {
     "access": "public"
