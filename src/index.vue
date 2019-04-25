@@ -5,7 +5,6 @@
       'dropdown-selector--inline': width,
       'dropdown-selector--disabled': disabled,
     }]"
-    :style="triggerStyle"
     v-click-outside="hideDropdown"
   >
     <div ref="popupTrigger" class="selector__selection" @click="toggleDropdown">
@@ -101,11 +100,6 @@ export default {
     },
     isMultiple() {
       return this.multilple && Array.isArray(this.selection)
-    },
-    triggerStyle() {
-      return {
-        width: parseSizeWithUnit(this.dropdownWidth)
-      }
     },
     popupStyle() {
       return {
